@@ -3,8 +3,12 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     //   custom plugins
-    alias(libs.plugins.jetbrains.kotlin.serialization)
+    // super core for kotlin serialization
+    alias(libs.plugins.ksp)
 
+    alias(libs.plugins.jetbrains.kotlin.serialization)
+    //hilt
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -43,7 +47,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -54,12 +57,20 @@ dependencies {
     implementation(libs.androidx.material3)
 
     // Custom dependencies
+    //navigation-3
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
     implementation(libs.androidx.material3.adaptive)
     implementation(libs.androidx.material3.adaptive.navigation3)
     implementation(libs.kotlinx.serialization.core)
+    //dagger-hilt
+    implementation(libs.dagger.hilt)
+    ksp(libs.dagger.hilt.compiler)
+    implementation(libs.dagger.hilt.navigation)
+    // coil(async img)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
     // Test
     testImplementation(libs.junit)

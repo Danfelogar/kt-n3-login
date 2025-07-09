@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">kt-test-post-in-login-screen</string>
+    <string name="welcome_to_our_app">Welcome to our App</string>
+    <string name="manage_your_information_securely">Manage your information securely</string>
+    <string name="all_in_one_place">All in one place</string>
+    <string name="access_your_data_when_you_need_it">Access your data when you need it</string>
+    <string name="guaranteed_safety">Guaranteed Safety</string>
+    <string name="your_data_is_protected">Your data is protected</string>
 </resources>

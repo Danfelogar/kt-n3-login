@@ -15,7 +15,10 @@ kotlinSerialization = "2.1.21"
 kotlinxSerializationCore = "1.8.1"
 material3AdaptiveNav3 = "1.0.0-SNAPSHOT"
 material3Adaptive = "1.2.0-alpha06"
-
+hilt = "2.56.2"
+hiltNavigationCompose = "1.2.0"
+ksp = "2.0.21-1.0.27"
+coilCompose = "3.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,7 +48,13 @@ kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 # add the snapshot builds repository to your project.
 androidx-material3-adaptive-navigation3 = { group = "androidx.compose.material3.adaptive", name = "adaptive-navigation3", version.ref = "material3AdaptiveNav3" }
 androidx-material3-adaptive = { module = "androidx.compose.material3.adaptive:adaptive", version.ref = "material3Adaptive" }
-
+#dagger-hilt
+dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref ="hilt"}
+dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref ="hilt"}
+dagger-hilt-navigation = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+#coil(async-img)
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilCompose" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -54,3 +63,7 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 #custom plugins
 # Optional plugins
 jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization"}
+# ksp
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+# hilt
+hilt = { id = "com.google.dagger.hilt.android", version.ref =  "hilt" }
