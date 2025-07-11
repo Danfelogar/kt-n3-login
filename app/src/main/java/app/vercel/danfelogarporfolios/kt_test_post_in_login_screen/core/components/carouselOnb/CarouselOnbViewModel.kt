@@ -4,8 +4,10 @@ import androidx.annotation.DrawableRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import app.vercel.danfelogarporfolios.kt_test_post_in_login_screen.R
 
@@ -21,8 +23,15 @@ class CarouselOnbViewModel @Inject constructor(): ViewModel() {
     var currentPage by mutableIntStateOf(0)
         private set
 
-    fun onPageChange(newPage: Int){
-        currentPage = newPage
+    fun onPageChange(forward: Boolean = false){
+        viewModelScope.launch {
+            val targetPage = when {
+                forward -> currentPage + 1
+                !forward -> currentPage - 1
+                else -> currentPage
+            }
+            currentPage = targetPage
+        }
     }
 }
 

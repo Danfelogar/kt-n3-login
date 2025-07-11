@@ -71,6 +71,10 @@ dependencies {
     // coil(async img)
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
+    //datastore preferences
+    implementation(libs.data.store.preferences)
+    //datastore proto
+    implementation(libs.data.store.proto)
 
     // Test
     testImplementation(libs.junit)
