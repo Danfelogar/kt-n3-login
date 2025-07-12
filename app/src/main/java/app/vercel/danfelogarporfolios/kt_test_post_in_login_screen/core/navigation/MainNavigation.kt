@@ -1,6 +1,7 @@
 package app.vercel.danfelogarporfolios.kt_test_post_in_login_screen.core.navigation
 
 import android.os.Build
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.ContentTransform
@@ -8,6 +9,7 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
@@ -17,8 +19,10 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import androidx.navigation3.ui.rememberSceneSetupNavEntryDecorator
+import app.vercel.danfelogarporfolios.kt_test_post_in_login_screen.AuthData
 import app.vercel.danfelogarporfolios.kt_test_post_in_login_screen.features.home.presentation.HomeScreen
 import app.vercel.danfelogarporfolios.kt_test_post_in_login_screen.features.login.presentation.LoginScreen
+import app.vercel.danfelogarporfolios.kt_test_post_in_login_screen.features.login.presentation.LoginViewModel
 import app.vercel.danfelogarporfolios.kt_test_post_in_login_screen.features.onboarding.presentation.OnboardingScreen
 import app.vercel.danfelogarporfolios.kt_test_post_in_login_screen.features.onboarding.presentation.OnboardingViewModel
 
@@ -27,9 +31,13 @@ import app.vercel.danfelogarporfolios.kt_test_post_in_login_screen.features.onbo
 @Composable
 fun MainNavigation(
     modifier: Modifier = Modifier,
-    onbViewModel: OnboardingViewModel = hiltViewModel()
-){
+    onbViewModel: OnboardingViewModel = hiltViewModel(),
+    loginViewModel: LoginViewModel = hiltViewModel()
+) {
     val isOnbFinished = onbViewModel.isOnBoardingFinished.collectAsState(initial = null)
+    val authData by loginViewModel.authData.collectAsState(initial = AuthData.getDefaultInstance())
+    Log.d("TAG", "Tipo de userInfo: ${authData.userInfo.javaClass.kotlin}")
+
     if (isOnbFinished.value == null) {
         //loading screen
         return
@@ -37,6 +45,7 @@ fun MainNavigation(
 
     val startDestination = when {
         !isOnbFinished.value!! -> Screen.Onboarding
+        authData.hasUserInfo() && authData.userInfo.id.isNotEmpty() -> Screen.Home
         else -> Screen.Login
     }
 
@@ -66,12 +75,18 @@ fun MainNavigation(
             }
             entry<Screen.Login> {
                 LoginScreen(
-                    onNavigate = { backStack.add(Screen.Home) }
+                    onNavigate = {
+                        backStack.add(Screen.Home)
+                        backStack.remove(Screen.Login)
+                    }
                 )
             }
-            entry<Screen.Home>{
+            entry<Screen.Home> {
                 HomeScreen(
-                    onNavigate = { backStack.add(Screen.Onboarding) }
+                    onNavigate = {
+                        backStack.add(Screen.Login)
+                        backStack.remove(Screen.Home)
+                    }
                 )
             }
         },

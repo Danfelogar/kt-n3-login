@@ -20,6 +20,10 @@ hiltNavigationCompose = "1.2.0"
 ksp = "2.0.21-1.0.27"
 coilCompose = "3.2.0"
 dataStore= "1.1.7"
+iconExtended="1.7.8"
+retrofit="3.0.0"
+protobuf = "3.22.3"
+pluginProtobuf = "0.9.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -60,6 +64,15 @@ coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCo
 data-store-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStore" }
 # Proto DataStore(type-safe data store)
 data-store-proto = { group = "androidx.datastore", name = "datastore", version.ref = "dataStore" }
+datastore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "dataStore" }
+protobuf-compiler = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
+protobuf-java = { group = "com.google.protobuf", name = "protobuf-java", version.ref = "protobuf" }
+protobuf-kotlin = { group = "com.google.protobuf", name = "protobuf-kotlin", version.ref = "protobuf" }
+#icon-extended
+material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "iconExtended" }
+#retrofit
+retrofit2-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -72,3 +85,6 @@ jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serializati
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 # hilt
 hilt = { id = "com.google.dagger.hilt.android", version.ref =  "hilt" }
+# protobuf
+protobuf = { id = "com.google.protobuf", version.ref = "pluginProtobuf" }
+

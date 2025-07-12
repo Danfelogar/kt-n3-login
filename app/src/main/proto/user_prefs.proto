@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_package = "app.vercel.danfelogarporfolios.kt_test_post_in_login_screen";
+option java_multiple_files = true;
+
+message UserInfo {
+  string id = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message AuthData {
+  string token = 1;
+  UserInfo user_info = 2;
+}

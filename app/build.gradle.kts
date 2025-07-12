@@ -9,6 +9,9 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.serialization)
     //hilt
     alias(libs.plugins.hilt)
+    //protobuf for datastore proto
+    alias(libs.plugins.protobuf)
+
 }
 
 android {
@@ -75,6 +78,15 @@ dependencies {
     implementation(libs.data.store.preferences)
     //datastore proto
     implementation(libs.data.store.proto)
+    implementation(libs.datastore.core)
+    implementation(libs.protobuf.compiler)
+    implementation(libs.protobuf.java)
+    implementation(libs.protobuf.kotlin)
+    //extended icons
+    implementation(libs.material.icons.extended)
+    //    retrofit
+    implementation(libs.retrofit2.retrofit)
+    implementation(libs.converter.gson)
 
     // Test
     testImplementation(libs.junit)
@@ -84,4 +96,19 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${libs.versions.protobuf.get()}"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                create("java") {
+                    option("lite")
+                }
+            }
+        }
+    }
 }
